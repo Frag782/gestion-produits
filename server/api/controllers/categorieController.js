@@ -41,12 +41,12 @@ exports.update_a_categorie = function(req, res) {
 
 
 exports.delete_a_categorie = function(req, res) {
-  Categorie.remove({
+  Categorie.deleteOne({
     _id: req.params.categorieId
   }, function(err, categorie) {
     if (err)
       res.send(err);
-    res.json({ message: 'Categorie successfully deleted' });
+    res.json({ message: 'Catégorie supprimée avec succès.' });
   });
 };
 
@@ -55,7 +55,7 @@ exports.create_many_categories = function(req, res) {
   let categoryArray = req.body;
 
   if (!Array.isArray(categoryArray)) {
-    return res.status(400).send({ message: "Input should be an array of categories" });
+    return res.status(400).send({ message: "L'entrée doit être une liste de catégories." });
   }
 
   Categorie.insertMany(categoryArray, function(err, categories) {
@@ -85,7 +85,7 @@ exports.delete_all_categories = function(req, res) {
     let deletedIds = req.body;
     
     if (!Array.isArray(deletedIds)) {
-      return res.status(400).send({message: "Input should be an array of IDs"});
+      return res.status(400).send({message: "L'entrée doit être une liste d'identifiants."});
     }
 
     try {
@@ -101,7 +101,7 @@ exports.delete_all_categories = function(req, res) {
     let updatedCategories = req.body;
     
     if (!Array.isArray(updatedCategories)) {
-      return res.status(400).send({message: "Input should be an array of categories"});
+      return res.status(400).send({message: "L'entrée doit être une liste de catégories."});
     }
 
     try {

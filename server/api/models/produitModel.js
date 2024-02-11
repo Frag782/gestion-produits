@@ -17,7 +17,7 @@ var ProduitSchema = new Schema({
     type:Number
   },
 
-  categories: {
+  categorie: {
     type:Schema.Types.ObjectId,
     ref:'Categorie' // ou bien ref:category
   }

@@ -12,9 +12,9 @@ const Categories = () => {
             <NavigationBar />
             <div className="col-10 offset-1">
                 <h4 className="display-4">Catégories</h4>
-                <a href="#">Ajouter une catégorie</a>
+                <a href="/categorie/ajouter">Ajouter une catégorie</a>
                 <hr />
-                <TableauCategories _categories={[]}/>
+                <TableauCategories />
             </div>
         </div>
     )

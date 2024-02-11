@@ -3,18 +3,30 @@ const Produit = require('../models/produitModel');
 
 
 exports.list_all_produit = function(req, res) {
-  const page = parseInt(req.query.page) || 1;
+  Produit.find({})
+    .exec(function(err, produits) {
+      if (err) {
+        res.status(500).send(err);
+      }
+      else {
+        res.json(produits);
+      }
+    });
+  /*const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
 
   Produit.find({})
     .skip((page - 1) * limit)
     .limit(limit)
     .exec(function(err, produits) {
-      if (err)
+      if (err) {
         res.status(500).send(err);
-      else
+      }
+      else {
         res.json(produits);
+      }
     });
+    */
 };
 
 
@@ -55,14 +67,12 @@ exports.update_a_produit = function(req, res) {
 
 
 exports.delete_a_produit = function(req, res) {
-
-
-  Produit.remove({
+  Produit.deleteOne({
     _id: req.params.produitId
   }, function(err, produit) {
     if (err)
       res.send(err);
-    res.json({ message: 'Produit successfully deleted' });
+    res.json({ message: 'Produit supprimé avec succès.' });
   });
 };
 
@@ -73,7 +83,7 @@ exports.create_many_produits = function(req, res) {
   let productArray = req.body;
 
   if (!Array.isArray(productArray)) {
-    return res.status(400).send({ message: "Input should be an array of products" });
+    return res.status(400).send({ message: "L'entrée doit être une liste de produits." });
   }
 
   Produit.insertMany(productArray, function(err, products) {
@@ -92,20 +102,6 @@ exports.order_by_price = function(req, res) {
   const sortDirection = ascending ? 1 : -1;
 
   Produit.find().sort({ prix: sortDirection }).exec(function(err, produits) {
-    if (err)
-      res.send(err);
-
-    res.json(produits);
-  });
-};
-
-
-exports.order_by_libelle = function(req, res) {
-  const ascending = req.query.ascending === 'false' ? false : true;
-
-  const sortDirection = ascending ? 1 : -1;
-
-  Produit.find().sort({ libelle: sortDirection }).exec(function(err, produits) {
     if (err)
       res.send(err);
 

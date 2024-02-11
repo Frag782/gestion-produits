@@ -36,7 +36,7 @@ router.route('/produit')
 
 /**
 * @openapi
-* /categorie/{categorieId}:
+* /produit/{produitId}:
 *   get:
 *     description: Retourne une catégorie spécifique par son ID.
 *     parameters:

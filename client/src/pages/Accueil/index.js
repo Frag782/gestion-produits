@@ -16,7 +16,7 @@ const Accueil = () => {
                     Bienvenue dans notre outil de gestion de produits.
                 </p>
                 <p>
-                    Voir la <a href={`${apiURL}/api-docs`} target="_blank">documentation</a>.
+                    Voir la <a href={`${apiURL}/api-docs`} target="_blank">documentation</a> de l'API.
                 </p>
             </div>
         </div>
